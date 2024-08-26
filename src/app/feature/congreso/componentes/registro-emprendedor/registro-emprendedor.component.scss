@@ -1,0 +1,7 @@
+.btn-registro-emprendedor {
+    background: #2C5C85;
+    &:hover {
+        background-color: lighten(#2C5C85, 25%);
+        border-color: lighten(#2C5C85, 25%);
+      }
+}

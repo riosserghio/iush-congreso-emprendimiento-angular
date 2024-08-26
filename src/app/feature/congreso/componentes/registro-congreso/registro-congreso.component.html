@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <form [formGroup]="registroCongresoForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row">
+            <div class="col-md-4 mb-2">
+                <label for="nombreCompleto" class="form-label">Nombre Completo</label>
+                <input type="text" id="nombreCompleto" formControlName="nombreCompleto" class="form-control"
+                    placeholder="Ingresa tu nombre completo" />
+                <div *ngIf="registroCongresoForm.get('nombreCompleto')?.invalid && 
+                registroCongresoForm.get('nombreCompleto')?.touched" class="text-danger">
+                    El nombre completo es requerido.
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" id="email" formControlName="email" class="form-control"
+                    placeholder="ejemplo@dominio.com" />
+                <div *ngIf="registroCongresoForm.get('email')?.invalid && registroCongresoForm.get('email')?.touched"
+                    class="text-danger">
+                    Ingresa un correo electrónico válido.
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" id="telefono" formControlName="telefono" class="form-control"
+                    placeholder="Ingresa tu teléfono" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-2">
+                <label for="pais" class="form-label">País</label>
+                <input type="text" id="pais" formControlName="pais" class="form-control"
+                    placeholder="Ingresa tu país" />
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" id="ciudad" formControlName="ciudad" class="form-control"
+                    placeholder="Ingresa tu ciudad" />
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="organizacion" class="form-label">Nombre de la organización que representa</label>
+                <input type="text" id="organizacion" formControlName="organizacion" class="form-control"
+                    placeholder="Ingresa el nombre de la organización" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-2">
+                <label for="tipoAsistente" class="form-label">Tipo de asistente</label>
+                <select id="tipoAsistente" formControlName="tipoAsistente" class="form-select">
+                    <option value="Emprendedor">Emprendedor</option>
+                    <option value="Inversionista">Inversionista</option>
+                    <option value="Corporativo o institución del ecosistema">Corporativo o institución del ecosistema
+                    </option>
+                    <option value="Otro">Otro / ¿Cuál?</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-2">
+                <div *ngIf="registroCongresoForm.get('tipoAsistente')?.value === 'Otro'">
+                    <label for="otroAsistente" class="form-label">Especifica</label>
+                    <input type="text" id="otroAsistente" formControlName="otroAsistente" class="form-control"
+                        placeholder="Especifica el tipo de asistente" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <button type="submit" class="btn btn-primary w-100">Registrar</button>
+            </div>
+        </div>
+    </form>
+</div>

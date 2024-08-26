@@ -1,0 +1,96 @@
+<div class="container mt-5">
+    <form [formGroup]="registroEmprendedorForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="nombres" class="form-label">Nombres del emprendedor</label>
+                <input type="text" id="nombres" formControlName="nombres" class="form-control"
+                    placeholder="Ingrese sus nombres" />
+                <div *ngIf="registroEmprendedorForm.get('nombres')?.invalid && 
+                    registroEmprendedorForm.get('nombres')?.touched" class="text-danger">
+                    <small>
+                        El nombre es requerido.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="apellidos" class="form-label">Apellidos del emprendedor</label>
+                <input type="text" id="apellidos" formControlName="apellidos" class="form-control"
+                    placeholder="Ingrese sus apellidos" />
+                <div *ngIf="registroEmprendedorForm.get('apellidos')?.invalid && 
+                    registroEmprendedorForm.get('apellidos')?.touched" class="text-danger">
+                    <small>
+                        El apellido es requerido.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="documentoIdentidad" class="form-label">Documento de identidad</label>
+                <input type="text" id="documentoIdentidad" formControlName="documentoIdentidad" class="form-control"
+                    placeholder="Ingresa su documento de identidad" solo-numeros />
+                <div *ngIf="registroEmprendedorForm.get('documentoIdentidad')?.touched && registroEmprendedorForm.get('documentoIdentidad')?.invalid"
+                    class="text-danger">
+                    <small>El documento de identidad es requerido.</small>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="correoElectronicoPersonal" class="form-label">Correo electrónico personal</label>
+                <input type="text" id="correoElectronicoPersonal" formControlName="correoElectronicoPersonal"
+                    class="form-control" placeholder="Ingrese su correo electrónico personal" />
+                <div *ngIf="registroEmprendedorForm.get('correoElectronicoPersonal')?.invalid && 
+                    registroEmprendedorForm.get('correoElectronicoPersonal')?.touched" class="text-danger">
+                    <small>
+                        El correo personal es requerido.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="correoElectronicoInstitucional" class="form-label">Correo electrónico
+                    institucional</label>
+                <input type="text" id="correoElectronicoInstitucional" formControlName="correoElectronicoInstitucional"
+                    class="form-control" placeholder="Ingrese su correo electrónico institucional" />
+                <div *ngIf="registroEmprendedorForm.get('correoElectronicoInstitucional')?.invalid && 
+                    registroEmprendedorForm.get('correoElectronicoInstitucional')?.touched" class="text-danger">
+                    <small>
+                        El correo institucional es requerido.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="numeroTelefono" class="form-label">Teléfono</label>
+                <input type="text" id="numeroTelefono" formControlName="numeroTelefono" class="form-control"
+                    placeholder="Ingrese su teléfono" solo-numeros />
+                <div *ngIf="registroEmprendedorForm.get('numeroTelefono')?.touched && registroEmprendedorForm.get('numeroTelefono')?.invalid"
+                    class="text-danger">
+                    <small>El teléfono es requerido.</small>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4 mb-2">
+                <label for="pais" class="form-label">País</label>
+                <input type="text" id="pais" formControlName="pais" class="form-control"
+                    placeholder="Ingresa tu país" />
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <input type="text" id="ciudad" formControlName="ciudad" class="form-control"
+                    placeholder="Ingresa tu ciudad" />
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="organizacion" class="form-label">Nombre de la organización que representa</label>
+                <input type="text" id="organizacion" formControlName="organizacion" class="form-control"
+                    placeholder="Ingresa el nombre de la organización" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <button type="submit" class="btn btn-primary btn-registro-emprendedor w-100">Registrar</button>
+            </div>
+            <div class="col-md-3 mb-4">
+                <button type="submit" class="btn btn-primary btn-registro-emprendedor  w-100">Regresar</button>
+            </div>
+        </div>
+    </form>
+</div>
