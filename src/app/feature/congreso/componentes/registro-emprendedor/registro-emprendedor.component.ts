@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
 })
 
 export class RegistroEmprendedorComponent implements OnInit {
+  aceptaPoliticaDatosPersonales: boolean = false;
+  pdfSrc = 'assets/terminos-condiciones/terminos-condiciones.pdf';
+
   paises: Pais[] = [];
   instituciones: Institucion[] = [];
 
@@ -46,7 +49,7 @@ export class RegistroEmprendedorComponent implements OnInit {
     this.paises = respuestaPaises.data;
   }
 
-  onSubmit(): void {
+  registrarEmprendedor(): void {
 
     if (this.registroEmprendedorForm.invalid) {
       this.registroEmprendedorForm.markAllAsTouched();
@@ -67,5 +70,9 @@ export class RegistroEmprendedorComponent implements OnInit {
 
   navegarRuta(ruta: string) {
     this.router.navigate([ruta]);
+  }
+
+  aceptacionPoliticaDatosPersonales(): void {
+    this.aceptaPoliticaDatosPersonales = !this.aceptaPoliticaDatosPersonales;
   }
 }
