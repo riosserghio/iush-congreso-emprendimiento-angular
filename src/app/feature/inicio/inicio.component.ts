@@ -13,7 +13,8 @@ export class InicioComponent {
   ) {
 
   }
-  navegarRegistroEmprendedor() {
-    this.router.navigate(['/Congreso']);
+
+  navegarRuta(ruta: string) {
+    this.router.navigate([ruta]);
   }
 }

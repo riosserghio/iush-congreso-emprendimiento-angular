@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { CongresoEmprendimientoServicio } from '../../servicios/congreso-emprendimiento.servicio';
+import { Pais } from '../../../../shared/interfaces/pais';
+import { Institucion } from '../../../../shared/interfaces/institucion';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-registro-emprendedor',
@@ -10,12 +14,15 @@ import { CongresoEmprendimientoServicio } from '../../servicios/congreso-emprend
 })
 
 export class RegistroEmprendedorComponent implements OnInit {
-  paises: string[] = [];
+  paises: Pais[] = [];
+  instituciones: Institucion[] = [];
+
   registroEmprendedorForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private congresoEmprendimientoServicio: CongresoEmprendimientoServicio) { }
+    private congresoEmprendimientoServicio: CongresoEmprendimientoServicio,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.registroEmprendedorForm = this.fb.group({
@@ -25,22 +32,40 @@ export class RegistroEmprendedorComponent implements OnInit {
       correoElectronicoPersonal: ['', [Validators.required, Validators.email]],
       correoElectronicoInstitucional: ['', [Validators.required, Validators.email]],
       numeroTelefono: ['', Validators.required],
+      pais: ['', Validators.required],
+      ciudadResidencia: ['', Validators.required],
+      idIES: ['', Validators.required],
+      programaAcademico: ['', Validators.required],
     });
 
     this.consultarPaises();
   }
 
   async consultarPaises() {
-
-    const paises = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerPaises());
-    console.log(paises);
+    const respuestaPaises = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerPaises());
+    this.paises = respuestaPaises.data;
   }
 
   onSubmit(): void {
+
+    if (this.registroEmprendedorForm.invalid) {
+      this.registroEmprendedorForm.markAllAsTouched();
+      return;
+    }
+
     if (this.registroEmprendedorForm.valid) {
       console.log('Formulario válido:', this.registroEmprendedorForm.value);
-    } else {
-      console.log('Formulario inválido');
     }
+  }
+
+  async paisSeleccionado(evento: any) {
+    this.instituciones = [];
+    const idPais = evento.target.value;
+    const respuestaInstituciones = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerInstitucionesPorPais(idPais));
+    this.instituciones = respuestaInstituciones.data;
+  }
+
+  navegarRuta(ruta: string) {
+    this.router.navigate([ruta]);
   }
 }

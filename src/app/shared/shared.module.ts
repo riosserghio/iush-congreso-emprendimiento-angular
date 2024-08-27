@@ -14,7 +14,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
   exports: [
     ReactiveFormsModule,
     FormsModule,
-    SoloNumerosDirective,
+    SoloNumerosDirective
   ],
   providers: [
     provideHttpClient(

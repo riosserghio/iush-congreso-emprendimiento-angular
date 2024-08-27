@@ -1,10 +1,9 @@
-export interface Pais {
-    "ok": boolean;
-    "data": PaisDetalle[]
-}
+import { BaseRespuesta } from "./base-respuesta";
 
-export interface PaisDetalle {
+export interface Pais {
     "_id": string;
     "nombre": string;
     "descripcion": string;
 }
+
+export interface PaisRespuesta extends BaseRespuesta<Pais[]> { }
