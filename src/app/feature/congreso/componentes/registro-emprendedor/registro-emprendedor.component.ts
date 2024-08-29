@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { CongresoEmprendimientoServicio } from '../../servicios/congreso-emprendimiento.servicio';
-import { Pais } from '../../../../shared/interfaces/pais';
-import { Institucion } from '../../../../shared/interfaces/institucion';
+import { Pais } from '../../../../shared/interfaces/pais.interface';
+import { Institucion } from '../../../../shared/interfaces/institucion.interface';
 import { Router } from '@angular/router';
+import { AlertasServicio } from '../../../../core/servicios/alertas.servicio';
+import { PreguntaEmprendimiento } from '../../../../shared/interfaces/pregunta-emprendimiento.interface';
+import { Emprendedor } from '../../../../shared/interfaces/emprendedor.interface';
 
 
 @Component({
@@ -15,17 +18,22 @@ import { Router } from '@angular/router';
 
 export class RegistroEmprendedorComponent implements OnInit {
   aceptaPoliticaDatosPersonales: boolean = false;
+  responderPreguntasEmprendimiento: boolean = false;
   pdfSrc = 'assets/terminos-condiciones/terminos-condiciones.pdf';
 
   paises: Pais[] = [];
   instituciones: Institucion[] = [];
+  preguntasEmprendimiento: PreguntaEmprendimiento[] = [];
+
+  emprendedor?: Emprendedor;
 
   registroEmprendedorForm!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
     private congresoEmprendimientoServicio: CongresoEmprendimientoServicio,
-    private readonly router: Router) { }
+    private alertaservicio: AlertasServicio,
+    private readonly router: Router,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.registroEmprendedorForm = this.fb.group({
@@ -57,7 +65,26 @@ export class RegistroEmprendedorComponent implements OnInit {
     }
 
     if (this.registroEmprendedorForm.valid) {
-      console.log('Formulario válido:', this.registroEmprendedorForm.value);
+      const emprendedor = {
+        nombres: this.registroEmprendedorForm.get('nombres')?.value,
+        apellidos: this.registroEmprendedorForm.get('apellidos')?.value,
+        documentoIdentidad: this.registroEmprendedorForm.get('documentoIdentidad')?.value,
+        correoElectronicoPersonal: this.registroEmprendedorForm.get('correoElectronicoPersonal')?.value,
+        correoElectronicoInstitucional: this.registroEmprendedorForm.get('correoElectronicoInstitucional')?.value,
+        numeroTelefono: this.registroEmprendedorForm.get('numeroTelefono')?.value,
+        pais: this.registroEmprendedorForm.get('pais')?.value,
+        ciudadResidencia: this.registroEmprendedorForm.get('ciudadResidencia')?.value,
+        idIES: this.registroEmprendedorForm.get('idIES')?.value,
+        programaAcademico: this.registroEmprendedorForm.get('programaAcademico')?.value,
+      };
+
+      this.congresoEmprendimientoServicio.crearEmprendedor(emprendedor).subscribe((emprendedorCreado) => {
+        let emprendedor = emprendedorCreado.data;
+        this.emprendedor = emprendedor;
+        this.alertaservicio.alertaExitosa({ titulo: 'Registro Emprendedor', texto: emprendedorCreado.message });
+        this.registroEmprendedorForm.reset();
+        this.consultarPreguntasEmprendimiento();
+      });
     }
   }
 
@@ -74,5 +101,16 @@ export class RegistroEmprendedorComponent implements OnInit {
 
   aceptacionPoliticaDatosPersonales(): void {
     this.aceptaPoliticaDatosPersonales = !this.aceptaPoliticaDatosPersonales;
+  }
+
+  async consultarPreguntasEmprendimiento() {
+    const preguntasEmprendimiento = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerPreguntas());
+    this.preguntasEmprendimiento = preguntasEmprendimiento.data;
+    this.mostrarPreguntasEmprendimiento();
+
+  }
+
+  mostrarPreguntasEmprendimiento(): void {
+    this.responderPreguntasEmprendimiento = !this.responderPreguntasEmprendimiento;
   }
 }

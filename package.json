@@ -19,9 +19,11 @@
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
     "@popperjs/core": "^2.11.8",
+    "@sweetalert2/ngx-sweetalert2": "^12.4.0",
     "bootstrap": "^5.3.3",
     "ng2-pdf-viewer": "^10.2.2",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.12.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

@@ -1,12 +1,10 @@
 <div class="container contenedor-pdf p-3" *ngIf="!aceptaPoliticaDatosPersonales">
-
     <div class="pdf-container">
         <pdf-viewer [src]="pdfSrc" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="false"
             [zoom]="1.1" [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true"
             [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false"
             style="width: 80%; height: 80vh;"></pdf-viewer>
     </div>
-
     <div class="d-flex justify-content-center align-items-center mt-3">
         <input class="form-check-input me-2" type="checkbox" id="termsCheckbox"
             (change)="aceptacionPoliticaDatosPersonales()">
@@ -16,7 +14,8 @@
     </div>
 </div>
 
-<div class="container contenedor-registro mt-5" *ngIf="aceptaPoliticaDatosPersonales">
+<div class="container contenedor-registro mt-5"
+    *ngIf="aceptaPoliticaDatosPersonales && !responderPreguntasEmprendimiento">
     <form [formGroup]="registroEmprendedorForm" (ngSubmit)="registrarEmprendedor()" novalidate>
         <div class="card p-3 mb-3">
             <div class="row mb-3">
@@ -147,6 +146,6 @@
     </form>
 </div>
 
-<div class="container contenedor-preguntas-emprendimiento">
-
+<div class="container contenedor-preguntas-emprendimiento" *ngIf="responderPreguntasEmprendimiento">
+    <app-preguntas-emprendimiento [emprendedorCreado]="emprendedor"></app-preguntas-emprendimiento>
 </div>
