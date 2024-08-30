@@ -1,14 +1,14 @@
 .navbar {
-  background: linear-gradient(180deg, #347dc3 28%, #e75b27 100%);
+  background: linear-gradient(180deg, #bfe0ff 28%, #a887e9  100%);
   color: #fff;
 
   .navbar-brand,
   .nav-link {
-    color: #fff;
+    color: #686868;
     font-weight: bold;
 
     &:hover {
-      color: #fff;
+      color: #686868;
       cursor: pointer;
     }
   }
@@ -23,7 +23,7 @@
 
   .navbar-logo {
     img {
-      width: 80%;
+      width: 100%;
     }
   }
 }
