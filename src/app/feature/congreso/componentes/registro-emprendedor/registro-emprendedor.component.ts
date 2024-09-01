@@ -92,7 +92,23 @@ export class RegistroEmprendedorComponent implements OnInit {
     this.instituciones = [];
     const idPais = evento.target.value;
     const respuestaInstituciones = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerInstitucionesPorPais(idPais));
-    this.instituciones = respuestaInstituciones.data;
+
+    if (respuestaInstituciones.data.length === 0) {
+      this.instituciones = [
+        {
+          _id: '',
+          paisIES: '',
+          regionDepartamento: '',
+          nombreLiderIES: '',
+          correoContacto: '',
+          telefonoContacto: '',
+          urlOficial: '',
+          nombre: 'No hay universidades registradas para este país'
+        }];
+
+    } else {
+      this.instituciones = respuestaInstituciones.data;
+    }
   }
 
   navegarRuta(ruta: string) {
