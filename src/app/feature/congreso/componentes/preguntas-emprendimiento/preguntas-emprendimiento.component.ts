@@ -3,9 +3,9 @@ import { Emprendedor } from '../../../../shared/interfaces/emprendedor.interface
 import { CongresoEmprendimientoServicio } from '../../servicios/congreso-emprendimiento.servicio';
 import { AlertasServicio } from '../../../../core/servicios/alertas.servicio';
 import { Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
-import { PreguntaEmprendimiento } from '../../../../shared/interfaces/pregunta-emprendimiento.interface';
+import { Sector } from '../../../../shared/interfaces/sector.interface';
 
 @Component({
   selector: 'app-preguntas-emprendimiento',
@@ -18,6 +18,7 @@ export class PreguntasEmprendimientoComponent implements OnInit {
   preguntas: any[] = [];
   respuestas: { [key: string]: boolean | null } = {}
   formularioEnviado = false;
+  sectores: Sector[] = [];
 
   constructor(
     private congresoEmprendimientoServicio: CongresoEmprendimientoServicio,
@@ -33,45 +34,67 @@ export class PreguntasEmprendimientoComponent implements OnInit {
       descripcionIdea: ['', Validators.required],
       propuestaSolucion: ['', Validators.required],
       fecha: [null, Validators.required],
+      idSector: ['', Validators.required],
     });
 
     this.consultarPreguntas();
+    this.obtenerSectores();
   }
 
   registrarPreguntasEmprendedor(): void {
-    this.formularioEnviado = true;
-
-    const todasRespondidas = this.preguntas.every(
-      pregunta => this.respuestas[pregunta._id] !== null
-    );
-
-    if (todasRespondidas) {
-      const respuestasParaGuardar = this.preguntas.map(pregunta => ({
-        _id: pregunta._id,
-        respuesta: this.respuestas[pregunta._id],
-      }));
-
-      console.log(respuestasParaGuardar);
-    } else {
-      console.log('Por favor responde todas las preguntas.');
-    }
 
     if (this.registroPreguntasEmprendedorForm.invalid) {
       this.registroPreguntasEmprendedorForm.markAllAsTouched();
       return;
     }
 
-    if (this.registroPreguntasEmprendedorForm.valid) {
+    if (this.emprendedorCreado && this.emprendedorCreado._id !== null || this.emprendedorCreado?._id !== undefined) {
+      this.formularioEnviado = true;
+      const todasRespondidas = this.preguntas.every(
+        pregunta => this.respuestas[pregunta._id] !== null
+      );
 
-      const respuestasParaGuardar = this.preguntas.map(pregunta => ({
-        _id: pregunta._id,
-        respuesta: this.respuestas[pregunta._id],
-      }));
+      if (todasRespondidas && this.registroPreguntasEmprendedorForm.valid) {
+        const respuestasParaGuardar = this.preguntas.map(pregunta => ({
+          numeroPregunta: Number.parseInt(pregunta.numero),
+          respuestaPregunta: this.respuestas[pregunta._id],
+        }));
 
-      console.log(respuestasParaGuardar);
+        const emprendimiento = {
+          idSector: this.registroPreguntasEmprendedorForm.get('idSector')?.value,
+          idIES: this.emprendedorCreado?.idIES,
+          idEmprendedor: this.emprendedorCreado?._id,
+          fecha: this.registroPreguntasEmprendedorForm.get('fecha')?.value,
+          descripcionIdea: this.registroPreguntasEmprendedorForm.get('descripcionIdea')?.value,
+          propuestaSolucion: this.registroPreguntasEmprendedorForm.get('propuestaSolucion')?.value,
+          respuestas: respuestasParaGuardar
+        }
+        this.congresoEmprendimientoServicio.crearEmprendimiento(emprendimiento).subscribe((emprendimientoCreado) => {
+          this.preguntas.forEach(pregunta => {
+            this.respuestas[pregunta._id] = null;
+          });
+          this.formularioEnviado = false;
+          
+          this.registroPreguntasEmprendedorForm.reset();
 
+          this.alertaservicio.alertaExitosa({
+            titulo: 'Registro Emprendimiento',
+            texto: emprendimientoCreado.message,
+            redireccionar: true,
+            urlRedireccion: '/'
+          });
 
+        });
+      }
     }
+    else {
+      this.alertaservicio.alertaError({
+        titulo: 'Registro Emprendimiento',
+        texto: 'No se encuentra emprendedor creado para relacionar con el emprendimiento'
+      });
+    }
+
+
   }
 
   navegarRuta(ruta: string) {
@@ -81,9 +104,7 @@ export class PreguntasEmprendimientoComponent implements OnInit {
   async consultarPreguntas() {
     const respuestaPreguntas = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerPreguntas());
     respuestaPreguntas.data.sort((a, b) => a.numero - b.numero);
-
     this.preguntas = respuestaPreguntas.data;
-
     this.preguntas.forEach(pregunta => {
       this.respuestas[pregunta._id] = null;
     });
@@ -98,4 +119,8 @@ export class PreguntasEmprendimientoComponent implements OnInit {
     return filas;
   }
 
+  async obtenerSectores() {
+    const respuestaSectores = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerSectores());
+    this.sectores = respuestaSectores.data;
+  }
 }

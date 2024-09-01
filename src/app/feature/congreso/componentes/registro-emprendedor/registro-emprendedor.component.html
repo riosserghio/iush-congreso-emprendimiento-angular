@@ -1,4 +1,4 @@
-<!--<div class="container contenedor-pdf p-3" *ngIf="!aceptaPoliticaDatosPersonales">
+<div class="container contenedor-pdf p-3" *ngIf="!aceptaPoliticaDatosPersonales">
     <div class="pdf-container">
         <pdf-viewer [src]="pdfSrc" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="false"
             [zoom]="1.1" [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true"
@@ -144,8 +144,8 @@
             </div>
         </div>
     </form>
-</div>-->
+</div>
 
-<div class="container contenedor-preguntas-emprendimiento" *ngIf="!responderPreguntasEmprendimiento">
+<div class="container contenedor-preguntas-emprendimiento" *ngIf="responderPreguntasEmprendimiento">
     <app-preguntas-emprendimiento [emprendedorCreado]="emprendedor"></app-preguntas-emprendimiento>
 </div>

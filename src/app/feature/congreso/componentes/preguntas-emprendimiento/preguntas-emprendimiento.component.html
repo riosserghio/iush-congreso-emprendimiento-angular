@@ -3,12 +3,12 @@
     <div class="contenedor-preguntas-principales">
         <form [formGroup]="registroPreguntasEmprendedorForm" (ngSubmit)="registrarPreguntasEmprendedor()" novalidate>
             <div class="card p-3 mb-3">
-                <div class="row mb-3 d-flex justify-content-center align-items-center">
-                    <div class="col-md-4 mb-2">
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-2">
                         <label for="descripcionIdea" class="form-label">Descripción de la idea de negocio o del
                             emprendimiento</label>
                         <textarea placeholder="Breve descripción de la necesidad o problema identificado"
-                            class="form-control" id="descripcionIdea" rows="3"></textarea>
+                            class="form-control" formControlName="descripcionIdea" id="descripcionIdea" rows="3"></textarea>
                         <div *ngIf="registroPreguntasEmprendedorForm.get('descripcionIdea')?.invalid &&
                              registroPreguntasEmprendedorForm.get('descripcionIdea')?.touched" class="text-danger">
                             <small>
@@ -16,11 +16,11 @@
                             </small>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-6 mb-2">
                         <label for="propuestaSolucion" class="form-label">Propuesta de solución al problema o necesidad
                             identificada</label>
                         <textarea placeholder="Breve descripción de la propuesta de solución" class="form-control"
-                            id="propuestaSolucion" rows="3"></textarea>
+                            id="propuestaSolucion" formControlName="propuestaSolucion" rows="3"></textarea>
                         <div *ngIf="registroPreguntasEmprendedorForm.get('propuestaSolucion')?.invalid &&
                              registroPreguntasEmprendedorForm.get('propuestaSolucion')?.touched" class="text-danger">
                             <small>
@@ -28,7 +28,10 @@
                             </small>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-2">
                         <label for="fecha" class="form-label">Fecha de creación del emprendimiento</label>
                         <input type="date" id="fecha" class="form-control" formControlName="fecha">
                         <div *ngIf="registroPreguntasEmprendedorForm.get('fecha')?.invalid &&
@@ -37,14 +40,26 @@
                                 La fecha es requerida.
                             </small>
                         </div>
-
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="idSector" class="form-label">Sector o industria del emprendimiento</label>
+                        <select id="idSector" formControlName="idSector" class="form-select">
+                            <option value="" disabled selected>Selecciona el sector o industria</option>
+                            <option *ngFor="let sector of sectores" [value]="sector._id">{{ sector.sector }}</option>
+                        </select>
+                        <div *ngIf="registroPreguntasEmprendedorForm.get('idSector')?.touched && registroPreguntasEmprendedorForm.get('idSector')?.invalid"
+                            class="text-danger">
+                            <small>Debe seleccionar un sector o industria.</small>
+                        </div>
                     </div>
                 </div>
+
             </div>
-            <div *ngFor="let row of obtenerFilas()" class="card mb-3">
+
+            <div *ngFor="let filaPreguntas of obtenerFilas()" class="card mb-3">
                 <div class="card-body">
                     <div class="row">
-                        <div *ngFor="let pregunta of row" class="col-md-4 mb-3">
+                        <div *ngFor="let pregunta of filaPreguntas" class="col-md-4 mb-3">
                             <label class="form-label">{{ pregunta.numero }}. {{ pregunta.pregunta }}</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -67,6 +82,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row justify-content-center">
                 <div class="col-md-3 mb-4">
                     <button type="submit" class="btn btn-primary btn-registro-preguntas w-100">Registrar

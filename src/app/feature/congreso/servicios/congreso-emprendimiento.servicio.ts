@@ -6,6 +6,8 @@ import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
 import { InstitucionRespuesta } from "../../../shared/interfaces/institucion.interface";
 import { Emprendedor, EmprendedorCreadoRespuesta } from "../../../shared/interfaces/emprendedor.interface";
 import { PreguntaEmprendimientoRespuesta } from "../../../shared/interfaces/pregunta-emprendimiento.interface";
+import { SectorRespuesta } from "../../../shared/interfaces/sector.interface";
+import { Emprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 
 @Injectable()
 
@@ -23,11 +25,22 @@ export class CongresoEmprendimientoServicio {
     }
 
     crearEmprendedor(emprendedor: Emprendedor): Observable<EmprendedorCreadoRespuesta> {
-        return this.httpServicio.post<EmprendedorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/informacionGeneral/crear`, emprendedor);
+        return this.httpServicio.post<EmprendedorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/informacionGeneral/crear`,
+            emprendedor);
     }
 
-    obtenerPreguntas() {
+    obtenerPreguntas(): Observable<PreguntaEmprendimientoRespuesta> {
         return this.httpServicio.get<PreguntaEmprendimientoRespuesta>(
             `${environment.urlBaseCongresoEmprendimiento}/preguntas/obtenerPreguntas`)
+    }
+
+    obtenerSectores(): Observable<SectorRespuesta> {
+        return this.httpServicio.get<SectorRespuesta>(
+            `${environment.urlBaseCongresoEmprendimiento}/sectorEmprendimiento/obtenerSector`)
+    }
+
+    crearEmprendimiento(emprendimiento: Emprendimiento): Observable<EmprendedorCreadoRespuesta> {
+        return this.httpServicio.post<EmprendedorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/informacionEmprendimiento/crear`,
+            emprendimiento);
     }
 }

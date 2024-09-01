@@ -1,4 +1,6 @@
 export interface Alerta {
     titulo?: string;
-    texto?:string;
+    texto?: string;
+    urlRedireccion?: string;
+    redireccionar?: boolean;
 }
