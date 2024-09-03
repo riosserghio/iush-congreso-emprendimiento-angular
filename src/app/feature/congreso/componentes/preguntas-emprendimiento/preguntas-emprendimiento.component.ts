@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { Sector } from '../../../../shared/interfaces/sector.interface';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-preguntas-emprendimiento',
@@ -19,6 +20,7 @@ export class PreguntasEmprendimientoComponent implements OnInit {
   respuestas: { [key: string]: boolean | null } = {}
   formularioEnviado = false;
   sectores: Sector[] = [];
+  descripcionTooltip: string = '';
 
   constructor(
     private congresoEmprendimientoServicio: CongresoEmprendimientoServicio,
@@ -39,6 +41,7 @@ export class PreguntasEmprendimientoComponent implements OnInit {
 
     this.consultarPreguntas();
     this.obtenerSectores();
+    this.activarTooltip();
   }
 
   registrarPreguntasEmprendedor(): void {
@@ -122,5 +125,31 @@ export class PreguntasEmprendimientoComponent implements OnInit {
   async obtenerSectores() {
     const respuestaSectores = await lastValueFrom(this.congresoEmprendimientoServicio.obtenerSectores());
     this.sectores = respuestaSectores.data;
+  }
+
+  sectorSeleccionado(event: Event): void {
+    const selectedSectorId = (event.target as HTMLSelectElement).value;
+    const sectorSeleccionado = this.sectores.find(sector => sector._id === selectedSectorId);
+
+    if (sectorSeleccionado) {
+      this.descripcionTooltip = sectorSeleccionado.descripcion;
+      setTimeout(() => {
+        this.activarTooltip();
+    }, 0);
+    }
+  }
+
+  activarTooltip(): void {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+
+    const existingTooltip = bootstrap.Tooltip.getInstance(tooltipTriggerList);
+        if (existingTooltip) {
+            existingTooltip.dispose();
+        }
+
+    tooltipTriggerList.forEach(tooltipTriggerEl => {
+      const tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
+      tooltip.show();
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertasServicio } from '../../core/servicios/alertas.servicio';
 
 @Component({
   selector: 'app-inicio',
@@ -9,12 +10,17 @@ import { Router } from '@angular/router';
 export class InicioComponent {
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly alertaServicio: AlertasServicio
   ) {
 
   }
 
-  navegarRuta(ruta: string) {
-    this.router.navigate([ruta]);
+  navegarRuta() {
+    this.alertaServicio.alertaOpcionesRegistro().then(opcionNavegacion => {
+      if (opcionNavegacion !== undefined) {
+        this.router.navigate([opcionNavegacion]);
+      }
+    });
   }
 }

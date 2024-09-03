@@ -8,7 +8,8 @@
                         <label for="descripcionIdea" class="form-label">Descripción de la idea de negocio o del
                             emprendimiento</label>
                         <textarea placeholder="Breve descripción de la necesidad o problema identificado"
-                            class="form-control" formControlName="descripcionIdea" id="descripcionIdea" rows="3"></textarea>
+                            class="form-control" formControlName="descripcionIdea" id="descripcionIdea"
+                            rows="3"></textarea>
                         <div *ngIf="registroPreguntasEmprendedorForm.get('descripcionIdea')?.invalid &&
                              registroPreguntasEmprendedorForm.get('descripcionIdea')?.touched" class="text-danger">
                             <small>
@@ -43,7 +44,9 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <label for="idSector" class="form-label">Sector o industria del emprendimiento</label>
-                        <select id="idSector" formControlName="idSector" class="form-select">
+                        <select id="idSector" formControlName="idSector" class="form-select"
+                            (change)="sectorSeleccionado($event)" [attr.title]="descripcionTooltip"
+                            data-bs-toggle="tooltip">>
                             <option value="" disabled selected>Selecciona el sector o industria</option>
                             <option *ngFor="let sector of sectores" [value]="sector._id">{{ sector.sector }}</option>
                         </select>
