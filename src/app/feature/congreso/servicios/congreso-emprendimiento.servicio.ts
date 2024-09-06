@@ -8,6 +8,7 @@ import { Emprendedor, EmprendedorCreadoRespuesta } from "../../../shared/interfa
 import { PreguntaEmprendimientoRespuesta } from "../../../shared/interfaces/pregunta-emprendimiento.interface";
 import { SectorRespuesta } from "../../../shared/interfaces/sector.interface";
 import { Emprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
+import { InscripcionCongreso, InscripcionCongresoCreadoRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
 
 @Injectable()
 
@@ -42,5 +43,10 @@ export class CongresoEmprendimientoServicio {
     crearEmprendimiento(emprendimiento: Emprendimiento): Observable<EmprendedorCreadoRespuesta> {
         return this.httpServicio.post<EmprendedorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/informacionEmprendimiento/crear`,
             emprendimiento);
+    }
+
+    inscripcionCongreso(inscripcionCongreso: InscripcionCongreso) {
+        return this.httpServicio.post<InscripcionCongresoCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/informacionGeneral/inscripcion`,
+            inscripcionCongreso);
     }
 }

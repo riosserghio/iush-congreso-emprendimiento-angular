@@ -72,6 +72,7 @@ export class PreguntasEmprendimientoComponent implements OnInit {
           propuestaSolucion: this.registroPreguntasEmprendedorForm.get('propuestaSolucion')?.value,
           respuestas: respuestasParaGuardar
         }
+        
         this.congresoEmprendimientoServicio.crearEmprendimiento(emprendimiento).subscribe((emprendimientoCreado) => {
           this.preguntas.forEach(pregunta => {
             this.respuestas[pregunta._id] = null;

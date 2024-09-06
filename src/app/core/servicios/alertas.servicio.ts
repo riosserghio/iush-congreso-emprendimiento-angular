@@ -41,6 +41,12 @@ export class AlertasServicio {
             reverseButtons: true,
             confirmButtonColor: '#2C5C85',
             cancelButtonColor: '#2C5C85',
+            willOpen: () => {
+                const confirmButton = Swal.getConfirmButton();
+                if (confirmButton) {
+                    confirmButton.disabled = true;
+                }
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 return '/congreso/inscripcion';
