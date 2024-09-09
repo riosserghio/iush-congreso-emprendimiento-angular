@@ -44,7 +44,7 @@ export class AlertasServicio {
             willOpen: () => {
                 const confirmButton = Swal.getConfirmButton();
                 if (confirmButton) {
-                    confirmButton.disabled = true;
+                    confirmButton.disabled = false;
                 }
             },
         }).then((result) => {

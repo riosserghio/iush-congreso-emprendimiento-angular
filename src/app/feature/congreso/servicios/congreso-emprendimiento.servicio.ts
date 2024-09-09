@@ -46,7 +46,7 @@ export class CongresoEmprendimientoServicio {
     }
 
     inscripcionCongreso(inscripcionCongreso: InscripcionCongreso) {
-        return this.httpServicio.post<InscripcionCongresoCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/informacionGeneral/inscripcion`,
+        return this.httpServicio.post<InscripcionCongresoCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/inscripcionEvento/crear`,
             inscripcionCongreso);
     }
 }

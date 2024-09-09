@@ -132,26 +132,28 @@ export class RegistroCongresoComponent {
 
     this.registroCongresoForm.reset();
 
-    this.alertaServicio.alertaExitosa({
-      titulo: 'Inscripción Congreso',
-      texto: 'Inscripción realizada con éxito',
-      redireccionar: true,
-      urlRedireccion: '/'
-    });
 
-    /*this.congresoEmprendimientoServicio.inscripcionCongreso(inscripcionEmprendimiento).subscribe((inscripcionCongresoResultado) => {
+    this.congresoEmprendimientoServicio.inscripcionCongreso(inscripcionEmprendimiento).subscribe((inscripcionCongresoResultado) => {
 
       this.registroCongresoForm.reset();
 
-      this.alertaServicio.alertaExitosa({
-        titulo: 'Inscripción Congreso',
-        texto: inscripcionCongresoResultado.message,
-        redireccionar: true,
-        urlRedireccion: '/'
-      });
+      if (inscripcionCongresoResultado.error != null) {
+        this.alertaServicio.alertaError({
+          titulo: 'Inscripción Congreso',
+          texto: inscripcionCongresoResultado.message,
+          redireccionar: true,
+          urlRedireccion: '/'
+        });
+      } else {
 
-    });*/
-
+        this.alertaServicio.alertaExitosa({
+          titulo: 'Inscripción Congreso',
+          texto: inscripcionCongresoResultado.message,
+          redireccionar: true,
+          urlRedireccion: '/'
+        });
+      }
+    });
   }
 
   navegarRuta(ruta: string) {
