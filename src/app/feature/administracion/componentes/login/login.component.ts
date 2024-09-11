@@ -45,7 +45,7 @@ export class LoginComponent {
     this.administracionServicio.iniciarSesion(correo, documentoIdentidad, loginUrl).subscribe((loginResultado) => {
 
       if (loginResultado.data) {
-        console.log('login exitoso')
+        this.navegarRuta('/administracion/opciones')
       } else {
         this.alertaServicio.alertaError(
           {
