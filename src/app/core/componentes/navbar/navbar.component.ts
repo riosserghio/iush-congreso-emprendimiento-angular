@@ -16,11 +16,16 @@ export class NavbarComponent {
 
   }
 
-  navegarRuta() {
-    this.alertaServicio.alertaOpcionesRegistro().then(opcionNavegacion => {
-      if (opcionNavegacion !== undefined) {
-        this.route.navigate([opcionNavegacion]);
-      }
-    });
+  navegarRuta(ruta: string) {
+    if (ruta.length > 0) {
+      this.route.navigate(['/administracion/login']);
+    } else {
+      this.alertaServicio.alertaOpcionesRegistro().then(opcionNavegacion => {
+        if (opcionNavegacion !== undefined) {
+          this.route.navigate([opcionNavegacion]);
+        }
+      });
+    }
+
   }
 }

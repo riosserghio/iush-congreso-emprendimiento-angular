@@ -12,6 +12,11 @@ const routes: Routes = [
         loadChildren: () =>
             import('./feature/congreso/congreso.module').then((mod) => mod.CongresoModule),
     },
+    {
+        path: 'administracion',
+        loadChildren: () =>
+            import('./feature/administracion/administracion.module').then((mod) => mod.AdministracionModule),
+    },
 ];
 
 @NgModule({
