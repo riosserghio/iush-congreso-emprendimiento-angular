@@ -17,9 +17,7 @@ import { Emprendedor } from '../../../../shared/interfaces/emprendedor.interface
 })
 
 export class RegistroEmprendedorComponent implements OnInit {
-  aceptaPoliticaDatosPersonales: boolean = false;
   responderPreguntasEmprendimiento: boolean = false;
-  pdfSrc = 'assets/terminos-condiciones/terminos-condiciones.pdf';
 
   paises: Pais[] = [];
   instituciones: Institucion[] = [];
@@ -113,10 +111,6 @@ export class RegistroEmprendedorComponent implements OnInit {
 
   navegarRuta(ruta: string) {
     this.router.navigate([ruta]);
-  }
-
-  aceptacionPoliticaDatosPersonales(): void {
-    this.aceptaPoliticaDatosPersonales = !this.aceptaPoliticaDatosPersonales;
   }
 
   async consultarPreguntasEmprendimiento() {

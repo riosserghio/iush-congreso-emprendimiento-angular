@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertasServicio } from '../../servicios/alertas.servicio';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AceptacionTratamientoDatosComponent } from '../../../feature/congreso/componentes/aceptacion-tratamiento-datos/aceptacion-tratamiento-datos.component';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +13,8 @@ export class NavbarComponent {
 
   constructor(
     private readonly route: Router,
-    private readonly alertaServicio: AlertasServicio
+    private readonly alertaServicio: AlertasServicio,
+    private modalService: NgbModal
   ) {
 
   }
@@ -19,13 +22,10 @@ export class NavbarComponent {
   navegarRuta(ruta: string) {
     if (ruta.length > 0) {
       this.route.navigate(['/administracion/login']);
-    } else {
-      this.alertaServicio.alertaOpcionesRegistro().then(opcionNavegacion => {
-        if (opcionNavegacion !== undefined) {
-          this.route.navigate([opcionNavegacion]);
-        }
-      });
-    }
+    } 
+  }
 
+  abrirModalAceptacionTratamientoDatos() {
+    this.modalService.open(AceptacionTratamientoDatosComponent, { size: 'lg', centered: true });
   }
 }

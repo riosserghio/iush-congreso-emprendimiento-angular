@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from "./shared/shared.module";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     declarations: [AppComponent],
@@ -13,7 +14,7 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        CoreModule, SharedModule,
+        CoreModule, SharedModule, NgbModule,
         SweetAlert2Module.forRoot()
     ],
     bootstrap: [AppComponent]
