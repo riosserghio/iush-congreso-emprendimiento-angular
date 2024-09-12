@@ -5,6 +5,7 @@ import { LoginRespuesta } from "../../../shared/interfaces/login.interface";
 import { Observable } from "rxjs";
 import { Institucion, InstitucionCreadaRespuesta, InstitucionRespuesta } from "../../../shared/interfaces/institucion.interface";
 import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
+import { RespuestaEmprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -29,5 +30,10 @@ export class AdministracionCongresoServicio {
         return this.httpServicio.post<InstitucionCreadaRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/institucionesEducativas/crear`,
             institucion);
     }
+
+    obtenerEmprendimientos(): Observable<RespuestaEmprendimiento> {
+        return this.httpServicio.get<RespuestaEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/informacionEmprendimiento/obtener`)
+    }
+
 
 }

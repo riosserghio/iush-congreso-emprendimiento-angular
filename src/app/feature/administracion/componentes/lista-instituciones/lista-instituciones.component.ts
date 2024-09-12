@@ -16,7 +16,6 @@ import { Pais } from '../../../../shared/interfaces/pais.interface';
 export class ListaInstitucionesComponent implements OnInit {
 
   instituciones: Institucion[] = [];
-  paises: Pais[] = [];
   institucionesPaginadas: Institucion[] = [];
   pagina: number = 1;
   tamanoPagina: number = 10;

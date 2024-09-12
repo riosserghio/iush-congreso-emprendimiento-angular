@@ -5,6 +5,7 @@ import { InicioAdministracionComponent } from "./componentes/inicio-administraci
 import { AuthGuard } from "../../core/Guards/auth.guard";
 import { RegistroInstitucionComponent } from "./componentes/registro-institucion/registro-institucion.component";
 import { ListaInstitucionesComponent } from "./componentes/lista-instituciones/lista-instituciones.component";
+import { ListaEmprendimientosComponent } from "./componentes/lista-emprendimientos/lista-emprendimientos.component";
 
 const routes: Routes = [
     {
@@ -29,6 +30,11 @@ const routes: Routes = [
         path: 'opciones/lista-instituciones',
         canActivate: [AuthGuard],
         component: ListaInstitucionesComponent
+    },
+    {
+        path: 'opciones/lista-emprendimientos',
+        canActivate: [AuthGuard],
+        component: ListaEmprendimientosComponent
     }
 ];
 
