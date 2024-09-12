@@ -4,6 +4,7 @@ export interface Institucion {
     _id: string;
     nombre: string;
     paisIES: string;
+    nombrePais: string;
     regionDepartamento: string;
     nombreLiderIES: string;
     correoContacto: string;

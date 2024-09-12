@@ -28,14 +28,14 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="documentoIdentidad" class="form-label">Documento de Identidad</label>
-                                <input type="text" placeholder="Ingresa tu documento de identidad"
+                                <label for="documentoIdentidad" class="form-label">Contraseña</label>
+                                <input type="password" placeholder="Ingresa tu contraseña"
                                     id="documentoIdentidad" class="form-control" formControlName="documentoIdentidad"
                                     required>
                                 <div *ngIf="loginForm.get('documentoIdentidad')?.invalid && 
                                     loginForm.get('documentoIdentidad')?.touched" class="text-danger">
                                     <small>
-                                        El documento de identidad es requerido.
+                                        La contraseña es requerida.
                                     </small>
                                 </div>
                             </div>

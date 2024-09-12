@@ -96,6 +96,7 @@ export class RegistroEmprendedorComponent implements OnInit {
         {
           _id: '',
           paisIES: '',
+          nombrePais: '',
           regionDepartamento: '',
           nombreLiderIES: '',
           correoContacto: '',

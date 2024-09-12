@@ -4,6 +4,7 @@ import { Institucion } from '../../../../shared/interfaces/institucion.interface
 import { lastValueFrom } from 'rxjs';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { Pais } from '../../../../shared/interfaces/pais.interface';
 
 @Component({
   selector: 'app-lista-instituciones',
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ListaInstitucionesComponent implements OnInit {
 
   instituciones: Institucion[] = [];
+  paises: Pais[] = [];
   institucionesPaginadas: Institucion[] = [];
   pagina: number = 1;
   tamanoPagina: number = 10;
@@ -28,10 +30,9 @@ export class ListaInstitucionesComponent implements OnInit {
   }
 
   async obtenerInstituciones() {
-    const respuestaPaises = await lastValueFrom(this.administracionServicio.obtenerInstituciones());
-    this.instituciones = respuestaPaises.data;
+    const respuestaInstituciones = await lastValueFrom(this.administracionServicio.obtenerInstituciones());
+    this.instituciones = respuestaInstituciones.data;
     this.totalItems = this.instituciones.length;
-
     this.actualizarPaginacionInstituciones();
   }
 
@@ -45,5 +46,4 @@ export class ListaInstitucionesComponent implements OnInit {
     this.pagina = numeroPagina;
     this.actualizarPaginacionInstituciones();
   }
-
 }
