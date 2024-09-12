@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdministracionCongresoServicio } from '../../servicios/administracion.servicio';
 import { AlertasServicio } from '../../../../core/servicios/alertas.servicio';
+import { AutenticacionServicio } from '../../../../core/servicios/autenticacion.servicio';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private administracionServicio: AdministracionCongresoServicio,
-    private alertaServicio: AlertasServicio
+    private alertaServicio: AlertasServicio,
+    private autenticacionServicio: AutenticacionServicio
   ) {
     this.loginForm = this.fb.group({
       perfil: ['', Validators.required],
@@ -45,6 +47,7 @@ export class LoginComponent {
     this.administracionServicio.iniciarSesion(correo, documentoIdentidad, loginUrl).subscribe((loginResultado) => {
 
       if (loginResultado.data) {
+        this.autenticacionServicio.iniciarSesion(correo, documentoIdentidad);
         this.navegarRuta('/administracion/opciones')
       } else {
         this.alertaServicio.alertaError(
@@ -57,6 +60,12 @@ export class LoginComponent {
         )
       }
     });
+  }
+
+
+  cerrarSesion() {
+    this.autenticacionServicio.cerrarSesion();
+    this.router.navigate(['/']);
   }
 
   navegarRuta(ruta: string) {
