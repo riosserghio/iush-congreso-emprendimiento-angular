@@ -7,6 +7,7 @@ import { RegistroInstitucionComponent } from "./componentes/registro-institucion
 import { ListaInstitucionesComponent } from "./componentes/lista-instituciones/lista-instituciones.component";
 import { ListaEmprendimientosComponent } from "./componentes/lista-emprendimientos/lista-emprendimientos.component";
 import { RegistroEvaluadorComponent } from "./componentes/registro-evaluador/registro-evaluador.component";
+import { ListaEvaluadoresComponent } from "./componentes/lista-evaluadores/lista-evaluadores.component";
 
 const routes: Routes = [
     {
@@ -41,7 +42,11 @@ const routes: Routes = [
         path: 'opciones/registro-evaluador',
         canActivate: [AuthGuard],
         component: RegistroEvaluadorComponent
-    }
+    }, {
+        path: 'opciones/lista-evaluadores',
+        canActivate: [AuthGuard],
+        component: ListaEvaluadoresComponent
+    },
 ];
 
 @NgModule({

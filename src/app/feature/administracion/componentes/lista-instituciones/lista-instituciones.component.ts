@@ -4,7 +4,7 @@ import { Institucion } from '../../../../shared/interfaces/institucion.interface
 import { lastValueFrom } from 'rxjs';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
-import { Pais } from '../../../../shared/interfaces/pais.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-instituciones',
@@ -21,7 +21,9 @@ export class ListaInstitucionesComponent implements OnInit {
   tamanoPagina: number = 10;
   totalItems: number = 0;
 
-  constructor(private administracionServicio: AdministracionCongresoServicio) {
+  constructor(private administracionServicio: AdministracionCongresoServicio,
+    private router: Router
+  ) {
   }
   ngOnInit(): void {
 
@@ -44,5 +46,8 @@ export class ListaInstitucionesComponent implements OnInit {
   onCambioPagina(numeroPagina: number) {
     this.pagina = numeroPagina;
     this.actualizarPaginacionInstituciones();
+  }
+  navegarRuta(ruta: string) {
+    this.router.navigate([ruta]);
   }
 }

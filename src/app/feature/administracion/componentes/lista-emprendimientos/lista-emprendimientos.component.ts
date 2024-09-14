@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Emprendimiento } from '../../../../shared/interfaces/emprendimiento.interface';
 import { AdministracionCongresoServicio } from '../../servicios/administracion.servicio';
 import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-emprendimientos',
@@ -16,7 +17,8 @@ export class ListaEmprendimientosComponent implements OnInit {
   totalItems: number = 0;
 
   constructor(
-    private administracionServicio: AdministracionCongresoServicio) {
+    private administracionServicio: AdministracionCongresoServicio,
+    private router: Router) {
   }
   ngOnInit(): void {
     this.obtenerEmprendimientos();
@@ -38,5 +40,8 @@ export class ListaEmprendimientosComponent implements OnInit {
   onCambioPagina(numeroPagina: number) {
     this.pagina = numeroPagina;
     this.actualizarPaginacion();
+  }
+  navegarRuta(ruta: string) {
+    this.router.navigate([ruta]);
   }
 }

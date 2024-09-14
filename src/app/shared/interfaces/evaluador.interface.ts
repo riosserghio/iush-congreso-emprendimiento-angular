@@ -8,6 +8,8 @@ export interface Evaluador {
     correo: string;
     idPais: string;
     documentoIdentidad: string;
+    nombrePais?: string;
+    nombreInstitucion?: string;
 }
 
 export interface EvaluadorCreadoRespuesta extends BaseRespuesta<Evaluador> { };
