@@ -9,6 +9,7 @@ import { ListaEmprendimientosComponent } from "./componentes/lista-emprendimient
 import { NgbModule, NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { RegistroEvaluadorComponent } from "./componentes/registro-evaluador/registro-evaluador.component";
 import { ListaEvaluadoresComponent } from "./componentes/lista-evaluadores/lista-evaluadores.component";
+import { AsignarEmprendimientoEvaluadorComponent } from "./componentes/asignar-emprendimiento-evaluador/asignar-emprendimiento-evaluador.component";
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { ListaEvaluadoresComponent } from "./componentes/lista-evaluadores/lista
         RegistroInstitucionComponent,
         ListaEmprendimientosComponent,
         RegistroEvaluadorComponent,
-        ListaEvaluadoresComponent],
+        ListaEvaluadoresComponent,
+        AsignarEmprendimientoEvaluadorComponent],
     imports: [
         CommonModule,
         SharedModule,

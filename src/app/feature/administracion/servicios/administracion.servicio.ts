@@ -7,6 +7,7 @@ import { Institucion, InstitucionCreadaRespuesta, InstitucionRespuesta } from ".
 import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
 import { RespuestaEmprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 import { Evaluador, EvaluadorCreadoRespuesta, EvaluadorRespuesta } from "../../../shared/interfaces/evaluador.interface";
+import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCreadoRespuesta } from "../../../shared/interfaces/asignacion-emprendimiento-evaluador.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -48,6 +49,11 @@ export class AdministracionCongresoServicio {
 
     obtenerEvaluadores(): Observable<EvaluadorRespuesta> {
         return this.httpServicio.get<EvaluadorRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/evaluador/obtener`)
+    }
+
+    crearAsignacionEvaluadorEmprendimientos(asignacion: AsignacionEmprendimientoEvaluador): Observable<AsignacionEmprendimientoEvaluadorCreadoRespuesta> {
+        return this.httpServicio.post<AsignacionEmprendimientoEvaluadorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/asignarEvaluador/crear`,
+            asignacion);
     }
 
 
