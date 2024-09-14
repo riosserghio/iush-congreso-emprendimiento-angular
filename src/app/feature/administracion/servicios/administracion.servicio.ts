@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { Institucion, InstitucionCreadaRespuesta, InstitucionRespuesta } from "../../../shared/interfaces/institucion.interface";
 import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
 import { RespuestaEmprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
+import { Evaluador, EvaluadorCreadoRespuesta } from "../../../shared/interfaces/evaluador.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -33,6 +34,16 @@ export class AdministracionCongresoServicio {
 
     obtenerEmprendimientos(): Observable<RespuestaEmprendimiento> {
         return this.httpServicio.get<RespuestaEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/informacionEmprendimiento/obtener`)
+    }
+
+    obtenerInstitucionesPorPais(idPais: string): Observable<InstitucionRespuesta> {
+        return this.httpServicio.get<InstitucionRespuesta>(
+            `${environment.urlBaseCongresoEmprendimiento}/institucionesEducativas/obtenerIESPorPais/${idPais}`)
+    }
+
+    crearEvaluador(evaluador: Evaluador): Observable<EvaluadorCreadoRespuesta> {
+        return this.httpServicio.post<EvaluadorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/evaluador/crear`,
+            evaluador);
     }
 
 

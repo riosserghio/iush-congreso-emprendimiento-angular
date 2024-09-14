@@ -7,19 +7,21 @@ import { AdministracionCongresoServicio } from "./servicios/administracion.servi
 import { RegistroInstitucionComponent } from "./componentes/registro-institucion/registro-institucion.component";
 import { ListaEmprendimientosComponent } from "./componentes/lista-emprendimientos/lista-emprendimientos.component";
 import { NgbModule, NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { RegistroEvaluadorComponent } from "./componentes/registro-evaluador/registro-evaluador.component";
 
 @NgModule({
     declarations: [
         LoginComponent,
         RegistroInstitucionComponent,
-        ListaEmprendimientosComponent],
+        ListaEmprendimientosComponent,
+        RegistroEvaluadorComponent],
     imports: [
         CommonModule,
         SharedModule,
         AdministracionRoutingModule,
         NgbModule,
         NgbPaginationModule,
-        
+
     ],
     providers: [
         AdministracionCongresoServicio
