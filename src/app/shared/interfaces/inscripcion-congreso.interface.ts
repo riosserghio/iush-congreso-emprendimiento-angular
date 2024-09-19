@@ -1,11 +1,13 @@
 import { BaseRespuesta } from "./base-respuesta.interface";
 
 export interface InscripcionCongreso {
+    _id?: string;
     nombres: string;
     apellidos: string;
     correo: string;
     telefono: string;
     pais: string;
+    nombrePais?: string;
     ciudad: string;
     tipoAsistente: string;
     interesesEvento: InteresEvento[];
@@ -26,3 +28,4 @@ export interface DivulgacionEvento {
 
 export interface InscripcionCongresoCreadoRespuesta extends BaseRespuesta<InscripcionCongreso> { }
 
+export interface InscripcionCongresoRespuesta extends BaseRespuesta<InscripcionCongreso[]> { }

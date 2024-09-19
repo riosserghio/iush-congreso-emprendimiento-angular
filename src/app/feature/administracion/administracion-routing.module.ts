@@ -9,6 +9,7 @@ import { ListaEmprendimientosComponent } from "./componentes/lista-emprendimient
 import { RegistroEvaluadorComponent } from "./componentes/registro-evaluador/registro-evaluador.component";
 import { ListaEvaluadoresComponent } from "./componentes/lista-evaluadores/lista-evaluadores.component";
 import { AsignarEmprendimientoEvaluadorComponent } from "./componentes/asignar-emprendimiento-evaluador/asignar-emprendimiento-evaluador.component";
+import { InscritosCongresoComponent } from "./componentes/inscritos-congreso/inscritos-congreso.component";
 
 const routes: Routes = [
     {
@@ -53,6 +54,11 @@ const routes: Routes = [
         path: 'opciones/asignar-emprendimiento-evaluador',
         canActivate: [AuthGuard],
         component: AsignarEmprendimientoEvaluadorComponent
+    },
+    {
+        path: 'opciones/inscritos-congreso',
+        canActivate: [AuthGuard],
+        component: InscritosCongresoComponent
     }
 ];
 

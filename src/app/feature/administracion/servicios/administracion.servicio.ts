@@ -8,6 +8,7 @@ import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
 import { RespuestaEmprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 import { Evaluador, EvaluadorCreadoRespuesta, EvaluadorRespuesta } from "../../../shared/interfaces/evaluador.interface";
 import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCreadoRespuesta } from "../../../shared/interfaces/asignacion-emprendimiento-evaluador.interface";
+import { InscripcionCongresoRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -55,6 +56,15 @@ export class AdministracionCongresoServicio {
         return this.httpServicio.post<AsignacionEmprendimientoEvaluadorCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/asignarEvaluador/crear`,
             asignacion);
     }
+
+    obtenerEmprendimientosNoAsociadosPorIdEvaluador(idEvaluador: string): Observable<RespuestaEmprendimiento> {
+        return this.httpServicio.get<RespuestaEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/evaluador/listarProyectosNoAsociados/${idEvaluador}`)
+    }
+
+    obtenerInscritosCongreso(): Observable<InscripcionCongresoRespuesta> {
+        return this.httpServicio.get<InscripcionCongresoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/inscripcionEvento/obtener`)
+    }
+
 
 
 }

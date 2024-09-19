@@ -4,7 +4,8 @@
         <div class="card p-3 mb-3">
             <div class="form-group mb-3">
                 <label for="evaluador">Seleccione Evaluador</label>
-                <select class="form-select" formControlName="evaluador">
+                <select class="form-select" (change)="evaluadorSeleccionado($event)" formControlName="evaluador">
+                    <option value="" disabled selected>Selecciona un evaluador</option>
                     <option *ngFor="let evaluador of evaluadores" [value]="evaluador._id">{{ evaluador.nombre }}
                     </option>
                 </select>
@@ -28,19 +29,21 @@
             <table class="table table-bordered table-hover table table-light table-striped">
                 <thead>
                     <tr>
-                        <th>Emprendedor</th>
-                        <th>Descripción de la Idea</th>
+                        <th>Sector</th>
+                        <th>Fecha creación</th>
                         <th>Estado</th>
+                        <th>Descripción de la Idea</th>
+                        <th>Propuesta de solución</th>
                         <th>Seleccionar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let emprendimiento of emprendimientosPaginados">
-                        <td class="tabla-td">{{ emprendimiento.infoEmprendedor?.nombres }} {{
-                            emprendimiento.infoEmprendedor?.apellidos
-                            }}</td>
-                        <td class="tabla-td">{{ emprendimiento.descripcionIdea }}</td>
+                        <td class="tabla-td">{{ emprendimiento.nombreSector }}</td>
+                        <td class="tabla-td">{{ emprendimiento.fecha }}</td>
                         <td class="tabla-td">{{ emprendimiento.estado }}</td>
+                        <td class="tabla-td">{{ emprendimiento.descripcionIdea }}</td>
+                        <td class="tabla-td">{{ emprendimiento.propuestaSolucion }}</td>
                         <td class="tabla-td">
                             <input type="checkbox" (change)="toggleEmprendimiento(emprendimiento._id!)" />
                         </td>

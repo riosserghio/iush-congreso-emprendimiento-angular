@@ -38,19 +38,11 @@ export class AsignarEmprendimientoEvaluadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEvaluadores();
-    this.cargarEmprendimientos();
   }
 
   async cargarEvaluadores() {
     const respuestaEvaluadores = await lastValueFrom(this.administracionCongresoServicio.obtenerEvaluadores());
     this.evaluadores = respuestaEvaluadores.data;
-  }
-
-  async cargarEmprendimientos() {
-    const respuestaEmprendimientos = await lastValueFrom(this.administracionCongresoServicio.obtenerEmprendimientos());
-    this.emprendimientos = respuestaEmprendimientos.data;
-    this.totalItems = this.emprendimientos.length;
-    this.actualizarPaginacion();
   }
 
   toggleEmprendimiento(id: string) {
@@ -83,27 +75,26 @@ export class AsignarEmprendimientoEvaluadorComponent implements OnInit {
       emprendimientos: this.emprendimientosSeleccionados
     }
 
-    console.log(asignacionEvaluadorEmprendimiento);
     this.asignacionForm.reset();
 
     this.administracionCongresoServicio.crearAsignacionEvaluadorEmprendimientos(
       asignacionEvaluadorEmprendimiento).subscribe((asignacionResultado) => {
-      if (asignacionResultado.error != null) {
-        this.alertaServicio.alertaError({
-          titulo: 'Asignación Evaluador - Emprendimiento',
-          texto: asignacionResultado.message,
-          redireccionar: false
-        });
-      } else {
+        if (asignacionResultado.error != null) {
+          this.alertaServicio.alertaError({
+            titulo: 'Asignación Evaluador - Emprendimiento',
+            texto: asignacionResultado.message,
+            redireccionar: false
+          });
+        } else {
 
-        this.alertaServicio.alertaExitosa({
-          titulo: 'Asignación Evaluador - Emprendimiento',
-          texto: 'Asignación realizada con éxito',
-          redireccionar: true,
-          urlRedireccion: '/administracion/opciones'
-        });
-      }
-    });
+          this.alertaServicio.alertaExitosa({
+            titulo: 'Asignación Evaluador - Emprendimiento',
+            texto: 'Asignación realizada con éxito',
+            redireccionar: true,
+            urlRedireccion: '/administracion/opciones'
+          });
+        }
+      });
 
 
 
@@ -120,5 +111,17 @@ export class AsignarEmprendimientoEvaluadorComponent implements OnInit {
     const inicio = (this.pagina - 1) * this.tamanoPagina;
     const fin = inicio + this.tamanoPagina;
     this.emprendimientosPaginados = this.emprendimientos.slice(inicio, fin);
+  }
+
+  async evaluadorSeleccionado(evento: any) {
+    this.emprendimientos = [];
+    const idEvaluador = evento.target.value;
+
+    const respuestaEmprendimientos = await lastValueFrom(
+      this.administracionCongresoServicio.obtenerEmprendimientosNoAsociadosPorIdEvaluador(idEvaluador));
+
+      this.emprendimientos = respuestaEmprendimientos.data;
+      this.totalItems = this.emprendimientos.length;
+      this.actualizarPaginacion();
   }
 }

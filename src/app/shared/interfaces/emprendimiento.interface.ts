@@ -15,6 +15,8 @@ export interface Emprendimiento {
     descripcionIdea?: string;
     propuestaSolucion?: string;
     estado?: string;
+    nombreSector?:string;
+    numeroEmprendimiento?: number;
     sector?: Sector;
     infoEmprendedor?: Emprendedor;
     IES?: Institucion;
