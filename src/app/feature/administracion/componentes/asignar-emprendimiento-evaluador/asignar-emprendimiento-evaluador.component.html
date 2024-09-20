@@ -29,6 +29,7 @@
             <table class="table table-bordered table-hover table table-light table-striped">
                 <thead>
                     <tr>
+                        <th>Institución Educativa</th>
                         <th>Sector</th>
                         <th>Fecha creación</th>
                         <th>Estado</th>
@@ -39,7 +40,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let emprendimiento of emprendimientosPaginados">
-                        <td class="tabla-td">{{ emprendimiento.nombreSector }}</td>
+                        <td class="tabla-td">{{ emprendimiento.nombreInstitucion }}</td>
+                         <td class="tabla-td">{{ emprendimiento.nombreSector }}</td>
                         <td class="tabla-td">{{ emprendimiento.fecha }}</td>
                         <td class="tabla-td">{{ emprendimiento.estado }}</td>
                         <td class="tabla-td">{{ emprendimiento.descripcionIdea }}</td>

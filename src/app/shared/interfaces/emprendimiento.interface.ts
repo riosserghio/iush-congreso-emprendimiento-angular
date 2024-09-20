@@ -9,13 +9,14 @@ export interface Emprendimiento {
     _id?: string;
     idSector: string;
     idIES: string;
+    nombreInstitucion?: string;
     idEmprendedor?: string;
     fecha: string;
     fechaInscripcion?: string;
     descripcionIdea?: string;
     propuestaSolucion?: string;
     estado?: string;
-    nombreSector?:string;
+    nombreSector?: string;
     numeroEmprendimiento?: number;
     sector?: Sector;
     infoEmprendedor?: Emprendedor;
