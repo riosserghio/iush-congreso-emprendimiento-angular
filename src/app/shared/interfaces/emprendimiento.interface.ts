@@ -18,6 +18,7 @@ export interface Emprendimiento {
     estado?: string;
     nombreSector?: string;
     numeroEmprendimiento?: number;
+    asignado?: boolean;
     sector?: Sector;
     infoEmprendedor?: Emprendedor;
     IES?: Institucion;

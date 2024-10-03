@@ -20,7 +20,7 @@ export class AsignarEmprendimientoEvaluadorComponent implements OnInit {
   emprendimientos: Emprendimiento[] = [];
   emprendimientosPaginados: Emprendimiento[] = [];
   pagina: number = 1;
-  tamanoPagina: number = 10;
+  tamanoPagina: number = 5;
   totalItems: number = 0;
 
 

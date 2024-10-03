@@ -79,7 +79,7 @@ export class RegistroEmprendedorComponent implements OnInit {
       this.congresoEmprendimientoServicio.crearEmprendedor(emprendedor).subscribe((emprendedorCreado) => {
         let emprendedor = emprendedorCreado.data;
         this.emprendedor = emprendedor;
-        this.alertaservicio.alertaExitosa({ titulo: 'Registro Emprendedor', texto: emprendedorCreado.message });
+        this.alertaservicio.alertaExitosa({ titulo: 'Registro Emprendimiento', texto: emprendedorCreado.message });
         this.registroEmprendedorForm.reset();
         this.consultarPreguntasEmprendimiento();
       });

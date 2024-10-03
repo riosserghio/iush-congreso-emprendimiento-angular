@@ -6,8 +6,8 @@ import { Injectable } from "@angular/core";
 export class AutenticacionServicio {
     constructor() { }
 
-    iniciarSesion(email: string, documentId: string) {
-        localStorage.setItem('user', JSON.stringify({ email, documentId }));
+    iniciarSesion(email: string, documentId: string, perfil: string, id?: string) {
+        localStorage.setItem('user', JSON.stringify({ email, documentId, perfil, id }));
     }
 
     estaAutenticado(): boolean {

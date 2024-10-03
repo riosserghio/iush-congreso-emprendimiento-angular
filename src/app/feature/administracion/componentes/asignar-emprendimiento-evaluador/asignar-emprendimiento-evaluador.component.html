@@ -35,19 +35,22 @@
                         <th>Estado</th>
                         <th>Descripción de la Idea</th>
                         <th>Propuesta de solución</th>
+                        <th>Emprendimiento Asignado</th>
                         <th>Seleccionar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let emprendimiento of emprendimientosPaginados">
                         <td class="tabla-td">{{ emprendimiento.nombreInstitucion }}</td>
-                         <td class="tabla-td">{{ emprendimiento.nombreSector }}</td>
+                        <td class="tabla-td">{{ emprendimiento.nombreSector }}</td>
                         <td class="tabla-td">{{ emprendimiento.fecha }}</td>
                         <td class="tabla-td">{{ emprendimiento.estado }}</td>
                         <td class="tabla-td">{{ emprendimiento.descripcionIdea }}</td>
                         <td class="tabla-td">{{ emprendimiento.propuestaSolucion }}</td>
-                        <td class="tabla-td">
-                            <input type="checkbox" (change)="toggleEmprendimiento(emprendimiento._id!)" />
+                        <td class="tabla-td text-center">{{emprendimiento.asignado ? 'Sí' : 'No' }}</td>
+                        <td class="tabla-td text-center">
+                            <input type="checkbox" *ngIf="!emprendimiento.asignado"
+                                (change)="toggleEmprendimiento(emprendimiento._id!)" />
                         </td>
                     </tr>
                 </tbody>

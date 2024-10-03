@@ -47,7 +47,7 @@ export class LoginComponent {
     this.administracionServicio.iniciarSesion(correo, documentoIdentidad, loginUrl).subscribe((loginResultado) => {
 
       if (loginResultado.data) {
-        this.autenticacionServicio.iniciarSesion(correo, documentoIdentidad);
+        this.autenticacionServicio.iniciarSesion(correo, documentoIdentidad, perfil, loginResultado.data?._id);
         this.navegarRuta('/administracion/opciones')
       } else {
         this.alertaServicio.alertaError(

@@ -7,13 +7,13 @@ import { Institucion, InstitucionCreadaRespuesta, InstitucionRespuesta } from ".
 import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
 import { RespuestaEmprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 import { Evaluador, EvaluadorCreadoRespuesta, EvaluadorRespuesta } from "../../../shared/interfaces/evaluador.interface";
-import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCreadoRespuesta } from "../../../shared/interfaces/asignacion-emprendimiento-evaluador.interface";
+import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCreadoRespuesta, EmprendimientoAsignadoEvaluadorRespuesta } from "../../../shared/interfaces/asignacion-emprendimiento-evaluador.interface";
 import { InscripcionCongresoRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
+import { EvaluacionEmprendimiento, EvaluacionEmprendimientoCreadaRespuesta } from "../../../shared/interfaces/evaluacion-emprendimiento.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
     constructor(protected httpServicio: HttpClient) {
-
     }
 
     iniciarSesion(correoElectronico: string, documentoIdentidad: string, rutaAutenticacion: string): Observable<LoginRespuesta> {
@@ -65,6 +65,12 @@ export class AdministracionCongresoServicio {
         return this.httpServicio.get<InscripcionCongresoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/inscripcionEvento/obtener`)
     }
 
+    obtenerEmprendimientosAsignadosPorIdEvaluador(idEvaluador: string): Observable<EmprendimientoAsignadoEvaluadorRespuesta> {
+        return this.httpServicio.get<EmprendimientoAsignadoEvaluadorRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/asignarEvaluador/obtenerPorIdEvaluador/${idEvaluador}`);
+    }
 
-
+    registrarEvaluacion(evaluacionEmprendimiento: EvaluacionEmprendimiento): Observable<EvaluacionEmprendimientoCreadaRespuesta> {
+        return this.httpServicio.post<EvaluacionEmprendimientoCreadaRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/evaluacionProyectos/crear`,
+            evaluacionEmprendimiento);
+    }
 }

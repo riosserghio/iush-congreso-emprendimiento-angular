@@ -119,7 +119,7 @@ export class RegistroCongresoComponent {
       nombres: this.registroCongresoForm.get('nombres')?.value,
       apellidos: this.registroCongresoForm.get('apellidos')?.value,
       correo: this.registroCongresoForm.get('correo')?.value,
-      telefono: this.registroCongresoForm.get('nombres')?.value,
+      telefono: this.registroCongresoForm.get('telefono')?.value,
       pais: this.registroCongresoForm.get('pais')?.value,
       ciudad: this.registroCongresoForm.get('ciudad')?.value,
       tipoAsistente: this.registroCongresoForm.get('tipoAsistente')?.value === 'Otro' ?
