@@ -50,4 +50,22 @@ export class ListaInstitucionesComponent implements OnInit {
   navegarRuta(ruta: string) {
     this.router.navigate([ruta]);
   }
+
+  exportarRegistros() {
+    this.administracionServicio.exportarUniversidades().subscribe((resultado: any) => {
+      this.descargarArchivo(resultado, 'instituciones.csv');
+    })
+  }
+
+  descargarArchivo(contenido: string, nombreArchivo: string) {
+    const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', nombreArchivo);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
 }

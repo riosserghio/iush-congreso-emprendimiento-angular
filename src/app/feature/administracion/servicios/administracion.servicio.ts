@@ -73,4 +73,20 @@ export class AdministracionCongresoServicio {
         return this.httpServicio.post<EvaluacionEmprendimientoCreadaRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/evaluacionProyectos/crear`,
             evaluacionEmprendimiento);
     }
+
+    exportarEmprendimientos() {
+        return this.httpServicio.get(`${environment.urlBaseCongresoEmprendimiento}/excelService/obtenerEmprendimientos`, { responseType: 'text' });
+    }
+
+    exportarEvaluadores() {
+        return this.httpServicio.get(`${environment.urlBaseCongresoEmprendimiento}/excelService/obtenerEvaluadores`, { responseType: 'text' });
+    }
+
+    exportarInscritosCongreso() {
+        return this.httpServicio.get(`${environment.urlBaseCongresoEmprendimiento}/excelService/obtenerInscritosEvento`, { responseType: 'text' });
+    }
+
+    exportarUniversidades() {
+        return this.httpServicio.get(`${environment.urlBaseCongresoEmprendimiento}/excelService/obtenerUniversidades`, { responseType: 'text' });
+    }
 }
