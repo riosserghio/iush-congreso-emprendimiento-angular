@@ -9,13 +9,14 @@ import { CongresoEmprendimientoServicio } from './servicios/congreso-emprendimie
 import { PreguntasEmprendimientoComponent } from './componentes/preguntas-emprendimiento/preguntas-emprendimiento.component';
 import { AceptacionTratamientoDatosComponent } from './componentes/aceptacion-tratamiento-datos/aceptacion-tratamiento-datos.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ConfirmacionIngresoCongresoComponent } from './componentes/confirmacion-ingreso-congreso/confirmacion-ingreso-congreso.component';
 
 @NgModule({
   declarations: [InicioEmprendedorComponent,
     RegistroEmprendedorComponent,
     RegistroCongresoComponent,
     PreguntasEmprendimientoComponent,
-    AceptacionTratamientoDatosComponent],
+    AceptacionTratamientoDatosComponent,ConfirmacionIngresoCongresoComponent],
   imports: [
     CommonModule, CongresoRoutingModule, SharedModule, PdfViewerModule
   ],

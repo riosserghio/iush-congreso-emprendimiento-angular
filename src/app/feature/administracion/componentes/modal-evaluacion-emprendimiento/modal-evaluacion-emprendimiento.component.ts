@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EvaluacionEmprendimiento, Pregunta } from '../../../../shared/interfaces/evaluacion-emprendimiento.interface';
+import { Evaluacion, EvaluacionEmprendimiento, Pregunta } from '../../../../shared/interfaces/evaluacion-emprendimiento.interface';
 import { AdministracionCongresoServicio } from '../../servicios/administracion.servicio';
 import { AlertasServicio } from '../../../../core/servicios/alertas.servicio';
 
@@ -130,24 +130,29 @@ export class ModalEvaluacionEmprendimientoComponent implements OnInit {
     if (this.evaluacionForm.valid) {
       const evaluacion = this.evaluacionForm.value;
 
-      const evaluacionEmprendimiento: EvaluacionEmprendimiento = {
+      let evaluacionPreguntas: Evaluacion[] = [];
+
+      switch (this.emprendimiento.estado) {
+        case 'Idea':
+          evaluacionPreguntas.push(new Evaluacion('Idea', evaluacion.preguntasIdea));
+          break;
+        case 'Desarrollo':
+          evaluacionPreguntas.push(new Evaluacion('Idea', evaluacion.preguntasIdea));
+          evaluacionPreguntas.push(new Evaluacion('Desarrollo', evaluacion.desarrollado));
+          break;
+        case 'Lanzamiento Temprano':
+          evaluacionPreguntas.push(new Evaluacion('Idea', evaluacion.preguntasIdea));
+          evaluacionPreguntas.push(new Evaluacion('Desarrollo', evaluacion.preguntasDesarrollo));
+          evaluacionPreguntas.push(new Evaluacion('Lanzamiento', evaluacion.preguntasLanzamiento));
+          break;
+      }
+
+      let evaluacionEmprendimiento: EvaluacionEmprendimiento = {
         evaluador: this.idEvaluador,
         emprendimiento: this.emprendimiento._id,
-        evaluacion: [
-          {
-            etapa: "Idea",
-            preguntas: evaluacion.preguntasIdea
-          },
-          {
-            etapa: "Desarrollo",
-            preguntas: evaluacion.preguntasDesarrollo
-          },
-          {
-            etapa: "Lanzamiento",
-            preguntas: evaluacion.preguntasLanzamiento
-          }
-        ]
+        evaluacion: evaluacionPreguntas
       };
+
 
       this.administracionCongresoServicio.registrarEvaluacion(evaluacionEmprendimiento).subscribe((evaluacionRegistrada) => {
         if (evaluacionRegistrada.error != null) {
@@ -166,7 +171,6 @@ export class ModalEvaluacionEmprendimientoComponent implements OnInit {
           });
         }
       });
-
       this.activeModal.close(evaluacionEmprendimiento);
     }
   }

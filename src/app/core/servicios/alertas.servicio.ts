@@ -46,6 +46,10 @@ export class AlertasServicio {
                 if (confirmButton) {
                     confirmButton.disabled = false;
                 }
+                const cancelButton = Swal.getCancelButton();
+                if (cancelButton) {
+                    cancelButton.disabled = true;
+                }
             },
         }).then((result) => {
             if (result.isConfirmed) {
