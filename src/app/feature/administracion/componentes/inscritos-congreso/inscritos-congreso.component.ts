@@ -52,7 +52,10 @@ export class InscritosCongresoComponent implements OnInit {
   }
 
   descargarArchivo(contenido: string, nombreArchivo: string) {
-    const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8;' });
+    const BOM = '\uFEFF';
+    const utf8Contenido = BOM + contenido;
+    const blob = new Blob([utf8Contenido], { type: 'text/csv;charset=utf-8;' });
+
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
@@ -61,5 +64,5 @@ export class InscritosCongresoComponent implements OnInit {
     link.click();
     document.body.removeChild(link);
   }
-  
+
 }

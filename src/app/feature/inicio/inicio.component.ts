@@ -21,7 +21,7 @@ export class InicioComponent {
 
   }
 
-  navegarRuta() {
+  navegarRuta(ruta: string) {
     this.alertaServicio.alertaOpcionesRegistro().then(opcionNavegacion => {
       if (opcionNavegacion !== undefined) {
         this.router.navigate([opcionNavegacion]);

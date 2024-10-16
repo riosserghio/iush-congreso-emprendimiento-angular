@@ -21,8 +21,8 @@ export class NavbarComponent {
 
   navegarRuta(ruta: string) {
     if (ruta.length > 0) {
-      this.route.navigate(['/administracion/login']);
-    } 
+      this.route.navigate([ruta]);
+    }
   }
 
   abrirModalAceptacionTratamientoDatos() {

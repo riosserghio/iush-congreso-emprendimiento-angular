@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/iush-congreso-emprendimiento-angular",
-          "baseHref": "/iush-congreso-emprendimiento-angular/",
+            "baseHref": "/iush-congreso-emprendimiento-angular/",
             "deployUrl": "/iush-congreso-emprendimiento-angular/",
             "index": "src/index.html",
             "browser": "src/main.ts",

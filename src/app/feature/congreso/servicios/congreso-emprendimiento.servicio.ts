@@ -9,6 +9,7 @@ import { PreguntaEmprendimientoRespuesta } from "../../../shared/interfaces/preg
 import { SectorRespuesta } from "../../../shared/interfaces/sector.interface";
 import { Emprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 import { InscripcionCongreso, InscripcionCongresoCreadoRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
+import { ConfirmacionAsistenciaCongreso, ConfirmacionAsistenciaCreada } from "../../../shared/interfaces/confirmacion-asistencia-congreso.interface";
 
 @Injectable()
 
@@ -48,5 +49,10 @@ export class CongresoEmprendimientoServicio {
     inscripcionCongreso(inscripcionCongreso: InscripcionCongreso) {
         return this.httpServicio.post<InscripcionCongresoCreadoRespuesta>(`${environment.urlBaseCongresoEmprendimiento}/inscripcionEvento/crear`,
             inscripcionCongreso);
+    }
+
+    confirmarAsistencia(confirmacionAsistencia: ConfirmacionAsistenciaCongreso) {
+        return this.httpServicio.post<ConfirmacionAsistenciaCreada>(`${environment.urlBaseCongresoEmprendimiento}/xxxxxxxxxx`,
+            confirmacionAsistencia);
     }
 }
