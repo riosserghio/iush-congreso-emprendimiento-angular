@@ -11,6 +11,7 @@ import { ListaEvaluadoresComponent } from "./componentes/lista-evaluadores/lista
 import { AsignarEmprendimientoEvaluadorComponent } from "./componentes/asignar-emprendimiento-evaluador/asignar-emprendimiento-evaluador.component";
 import { InscritosCongresoComponent } from "./componentes/inscritos-congreso/inscritos-congreso.component";
 import { EvaluacionEmprendimientoComponent } from "./componentes/evaluacion-emprendimiento/evaluacion-emprendimiento.component";
+import { EvaluacionResultadosComponent } from "./componentes/evaluacion-resultados/evaluacion-resultados.component";
 
 const routes: Routes = [
     {
@@ -65,6 +66,11 @@ const routes: Routes = [
         path: 'opciones/evaluacion-emprendimiento',
         canActivate: [AuthGuard],
         component: EvaluacionEmprendimientoComponent
+    },
+    {
+        path: 'opciones/evaluacion-resultados',
+        canActivate: [AuthGuard],
+        component: EvaluacionResultadosComponent
     }
 ];
 

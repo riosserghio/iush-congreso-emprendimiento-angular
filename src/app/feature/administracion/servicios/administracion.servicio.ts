@@ -10,6 +10,7 @@ import { Evaluador, EvaluadorCreadoRespuesta, EvaluadorRespuesta } from "../../.
 import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCreadoRespuesta, EmprendimientoAsignadoEvaluadorRespuesta } from "../../../shared/interfaces/asignacion-emprendimiento-evaluador.interface";
 import { InscripcionCongresoRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
 import { EvaluacionEmprendimiento, EvaluacionEmprendimientoCreadaRespuesta } from "../../../shared/interfaces/evaluacion-emprendimiento.interface";
+import { RespuestaResultadoEvaluacionEmprendimiento, ResultadoEvaluacionEmprendimiento } from "../../../shared/interfaces/evaluacion-emprendimiento-resultado.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -88,5 +89,18 @@ export class AdministracionCongresoServicio {
 
     exportarUniversidades() {
         return this.httpServicio.get(`${environment.urlBaseCongresoEmprendimiento}/excelService/obtenerUniversidades`, { responseType: 'text' });
+    }
+
+    obtenerEmprendimientosEvaluados(): Observable<RespuestaResultadoEvaluacionEmprendimiento> {
+        return this.httpServicio.get<RespuestaResultadoEvaluacionEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/evaluacionProyectos/listarProyectosEvaluados`);
+    }
+
+    obtenerEmprendimientosPitch(): Observable<RespuestaResultadoEvaluacionEmprendimiento> {
+        return this.httpServicio.get<RespuestaResultadoEvaluacionEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/etapaPitch/obtener`);
+    }
+
+    crearEmprendimientosPasanAPitch(emprendimientos: ResultadoEvaluacionEmprendimiento[]) {
+        return this.httpServicio.post<RespuestaResultadoEvaluacionEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/etapaPitch/crearEnBloque`,
+            emprendimientos);
     }
 }
