@@ -52,7 +52,7 @@ export class CongresoEmprendimientoServicio {
     }
 
     confirmarAsistencia(confirmacionAsistencia: ConfirmacionAsistenciaCongreso) {
-        return this.httpServicio.post<ConfirmacionAsistenciaCreada>(`${environment.urlBaseCongresoEmprendimiento}/xxxxxxxxxx`,
+        return this.httpServicio.post<ConfirmacionAsistenciaCreada>(`${environment.urlBaseCongresoEmprendimiento}/inscripcionEvento/confirmarAsistenciaEvento`,
             confirmacionAsistencia);
     }
 }

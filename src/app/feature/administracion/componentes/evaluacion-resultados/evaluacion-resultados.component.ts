@@ -20,8 +20,7 @@ export class EvaluacionResultadosComponent implements OnInit {
   pagina: number = 1;
   tamanoPagina: number = 10;
   totalItems: number = 0;
-  esRecargaInicial = true;
-
+  
   constructor(
     private administracionCongresoServicio: AdministracionCongresoServicio,
     private router: Router,
@@ -59,7 +58,7 @@ export class EvaluacionResultadosComponent implements OnInit {
     this.actualizarPaginacion();
   }
 
-  enviarEmprendimientosAPitch() {
+  async enviarEmprendimientosAPitch() {
 
     if (this.evaluacionesAplicaPitchForm.invalid) {
       this.evaluacionesAplicaPitchForm.markAllAsTouched();
@@ -75,10 +74,8 @@ export class EvaluacionResultadosComponent implements OnInit {
       return;
     }
 
-    this.emprendimientosParaPitchSeleccionados.forEach((emprendimiento) => {
-      emprendimiento.pasaAPitch = true;
-    })
-    
+    await this.actualizarEmprendimientosParaPitch(this.emprendimientosParaPitchSeleccionados);
+        
     this.administracionCongresoServicio.crearEmprendimientosPasanAPitch(
       this.emprendimientosParaPitchSeleccionados).subscribe((resultado) => {
         if (resultado.error != null) {
@@ -97,9 +94,17 @@ export class EvaluacionResultadosComponent implements OnInit {
           });
         }
       });
-
-    console.log(this.emprendimientosParaPitchSeleccionados);
   }
+
+  actualizarEmprendimientosParaPitch(emprendimientos: any[]): Promise<void> {
+    return new Promise((resolve) => {
+      emprendimientos.forEach((emprendimiento) => {
+        emprendimiento.pasaAPitch = true;
+      });
+      resolve();
+    });
+  }
+
 
   toggleEmprendimiento(emprendimiento: ResultadoEvaluacionEmprendimiento) {
     const index = this.emprendimientosParaPitchSeleccionados.indexOf(emprendimiento);

@@ -12,6 +12,7 @@ import { AsignarEmprendimientoEvaluadorComponent } from "./componentes/asignar-e
 import { InscritosCongresoComponent } from "./componentes/inscritos-congreso/inscritos-congreso.component";
 import { EvaluacionEmprendimientoComponent } from "./componentes/evaluacion-emprendimiento/evaluacion-emprendimiento.component";
 import { EvaluacionResultadosComponent } from "./componentes/evaluacion-resultados/evaluacion-resultados.component";
+import { ListaEmprendimientosPitchComponent } from "./componentes/lista-emprendimientos-pitch/lista-emprendimientos-pitch.component";
 
 const routes: Routes = [
     {
@@ -71,6 +72,11 @@ const routes: Routes = [
         path: 'opciones/evaluacion-resultados',
         canActivate: [AuthGuard],
         component: EvaluacionResultadosComponent
+    },
+    {
+        path: 'opciones/lista-emprendimientos-pitch',
+        canActivate: [AuthGuard],
+        component: ListaEmprendimientosPitchComponent
     }
 ];
 
