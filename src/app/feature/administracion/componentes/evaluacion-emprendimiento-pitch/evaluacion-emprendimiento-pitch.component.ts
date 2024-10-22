@@ -158,8 +158,6 @@ export class EvaluacionEmprendimientoPitchComponent implements OnInit {
             });
           }
         });
-
-        console.log(evaluacionPitch);
       });
 
   }

@@ -11,6 +11,7 @@ import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCre
 import { InscripcionCongreso, InscripcionCongresoCreadoRespuesta, InscripcionCongresoRespuesta, InscritoInvitadoEspecialExisteRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
 import { EvaluacionEmprendimiento, EvaluacionEmprendimientoCreadaRespuesta } from "../../../shared/interfaces/evaluacion-emprendimiento.interface";
 import { EvaluacionPitch, RespuestaEvlauacionPitchCreada, RespuestaResultadoEvaluacionEmprendimiento, ResultadoEvaluacionEmprendimiento } from "../../../shared/interfaces/evaluacion-emprendimiento-resultado.interface";
+import { RespuestaResultadoEmprendimientoPitch } from "../../../shared/interfaces/resultado-emprendimiento-pitch.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -111,5 +112,10 @@ export class AdministracionCongresoServicio {
 
     registrarEvaluacionPitch(evaluacionPitch: EvaluacionPitch) {
         return this.httpServicio.post<RespuestaEvlauacionPitchCreada>(`${environment.urlBaseCongresoEmprendimiento}/evaluacionEtapaPitch/crear`, evaluacionPitch);
+    }
+
+    obtenerResultadosEvaluacionPitch(): Observable<RespuestaResultadoEmprendimientoPitch> {
+        return this.httpServicio.get<RespuestaResultadoEmprendimientoPitch>(
+            `${environment.urlBaseCongresoEmprendimiento}/evaluacionEtapaPitch/resultadosPitch`);
     }
 }

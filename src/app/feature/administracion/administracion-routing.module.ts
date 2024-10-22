@@ -14,6 +14,7 @@ import { EvaluacionEmprendimientoComponent } from "./componentes/evaluacion-empr
 import { EvaluacionResultadosComponent } from "./componentes/evaluacion-resultados/evaluacion-resultados.component";
 import { ListaEmprendimientosPitchComponent } from "./componentes/lista-emprendimientos-pitch/lista-emprendimientos-pitch.component";
 import { EvaluacionEmprendimientoPitchComponent } from "./componentes/evaluacion-emprendimiento-pitch/evaluacion-emprendimiento-pitch.component";
+import { ResultadosEvaluacionPitchComponent } from "./componentes/resultados-evaluacion-pitch/resultados-evaluacion-pitch.component";
 
 const routes: Routes = [
     {
@@ -82,7 +83,12 @@ const routes: Routes = [
     {
         path: 'opciones/evaluar-pitch',
         component: EvaluacionEmprendimientoPitchComponent
-    }
+    },
+    {
+        path: 'opciones/resultados-pitch',
+        canActivate: [AuthGuard],
+        component: ResultadosEvaluacionPitchComponent
+    },
 ];
 
 @NgModule({
