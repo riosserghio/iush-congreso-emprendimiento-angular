@@ -22,13 +22,30 @@ export class AlertasServicio {
             icon: 'success',
             title: alerta.titulo,
             text: alerta.texto,
-            confirmButtonColor: '#2C5C85'
+            confirmButtonColor: '#2C5C85',
         }).then((resultado) => {
             if (resultado.isConfirmed && alerta.redireccionar) {
                 this.router.navigate([alerta.urlRedireccion]);
             }
         });
     }
+
+    alertaWarningPitch(alerta: Alerta): void {
+        Swal.fire({
+            icon: 'warning',
+            title: alerta.titulo,
+            text: alerta.texto,
+            confirmButtonColor: '#2C5C85',
+            denyButtonText: 'Cancelar',
+            confirmButtonText: 'Si, Continuar',
+            showDenyButton: true,
+        }).then((resultado) => {
+            if (resultado.isConfirmed) {
+                this.router.navigate([alerta.urlRedireccion]);
+            }
+        });
+    }
+
 
     async alertaOpcionesRegistro(): Promise<string | undefined> {
         return Swal.fire({

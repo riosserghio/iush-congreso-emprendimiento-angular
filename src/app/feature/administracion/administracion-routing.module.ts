@@ -13,6 +13,7 @@ import { InscritosCongresoComponent } from "./componentes/inscritos-congreso/ins
 import { EvaluacionEmprendimientoComponent } from "./componentes/evaluacion-emprendimiento/evaluacion-emprendimiento.component";
 import { EvaluacionResultadosComponent } from "./componentes/evaluacion-resultados/evaluacion-resultados.component";
 import { ListaEmprendimientosPitchComponent } from "./componentes/lista-emprendimientos-pitch/lista-emprendimientos-pitch.component";
+import { EvaluacionEmprendimientoPitchComponent } from "./componentes/evaluacion-emprendimiento-pitch/evaluacion-emprendimiento-pitch.component";
 
 const routes: Routes = [
     {
@@ -77,6 +78,10 @@ const routes: Routes = [
         path: 'opciones/lista-emprendimientos-pitch',
         canActivate: [AuthGuard],
         component: ListaEmprendimientosPitchComponent
+    },
+    {
+        path: 'opciones/evaluar-pitch',
+        component: EvaluacionEmprendimientoPitchComponent
     }
 ];
 

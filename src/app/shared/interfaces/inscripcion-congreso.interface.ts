@@ -26,6 +26,12 @@ export interface DivulgacionEvento {
     respuesta: boolean;
 }
 
+export interface InscritoExiste {
+    existe: boolean;
+}
+
 export interface InscripcionCongresoCreadoRespuesta extends BaseRespuesta<InscripcionCongreso> { }
 
 export interface InscripcionCongresoRespuesta extends BaseRespuesta<InscripcionCongreso[]> { }
+
+export interface InscritoInvitadoEspecialExisteRespuesta extends BaseRespuesta<InscritoExiste> { };

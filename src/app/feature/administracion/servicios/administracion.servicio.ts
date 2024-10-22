@@ -2,15 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment";
 import { LoginRespuesta } from "../../../shared/interfaces/login.interface";
-import { Observable } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
 import { Institucion, InstitucionCreadaRespuesta, InstitucionRespuesta } from "../../../shared/interfaces/institucion.interface";
 import { PaisRespuesta } from "../../../shared/interfaces/pais.interface";
 import { RespuestaEmprendimiento } from "../../../shared/interfaces/emprendimiento.interface";
 import { Evaluador, EvaluadorCreadoRespuesta, EvaluadorRespuesta } from "../../../shared/interfaces/evaluador.interface";
 import { AsignacionEmprendimientoEvaluador, AsignacionEmprendimientoEvaluadorCreadoRespuesta, EmprendimientoAsignadoEvaluadorRespuesta } from "../../../shared/interfaces/asignacion-emprendimiento-evaluador.interface";
-import { InscripcionCongresoRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
+import { InscripcionCongreso, InscripcionCongresoCreadoRespuesta, InscripcionCongresoRespuesta, InscritoInvitadoEspecialExisteRespuesta } from "../../../shared/interfaces/inscripcion-congreso.interface";
 import { EvaluacionEmprendimiento, EvaluacionEmprendimientoCreadaRespuesta } from "../../../shared/interfaces/evaluacion-emprendimiento.interface";
-import { RespuestaResultadoEvaluacionEmprendimiento, ResultadoEvaluacionEmprendimiento } from "../../../shared/interfaces/evaluacion-emprendimiento-resultado.interface";
+import { EvaluacionPitch, RespuestaEvlauacionPitchCreada, RespuestaResultadoEvaluacionEmprendimiento, ResultadoEvaluacionEmprendimiento } from "../../../shared/interfaces/evaluacion-emprendimiento-resultado.interface";
 
 @Injectable()
 export class AdministracionCongresoServicio {
@@ -102,5 +102,14 @@ export class AdministracionCongresoServicio {
     crearEmprendimientosPasanAPitch(emprendimientos: ResultadoEvaluacionEmprendimiento[]) {
         return this.httpServicio.post<RespuestaResultadoEvaluacionEmprendimiento>(`${environment.urlBaseCongresoEmprendimiento}/etapaPitch/crearEnBloque`,
             emprendimientos);
+    }
+
+    obtenerInvitadoEspecial(correo: string): Observable<InscripcionCongresoCreadoRespuesta> {
+        return this.httpServicio.get<InscripcionCongresoCreadoRespuesta>(
+            `${environment.urlBaseCongresoEmprendimiento}/inscripcionEvento/verificarInscripcionEvento/${correo}`);
+    }
+
+    registrarEvaluacionPitch(evaluacionPitch: EvaluacionPitch) {
+        return this.httpServicio.post<RespuestaEvlauacionPitchCreada>(`${environment.urlBaseCongresoEmprendimiento}/evaluacionEtapaPitch/crear`, evaluacionPitch);
     }
 }

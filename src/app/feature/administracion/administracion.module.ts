@@ -16,6 +16,7 @@ import { ModalEvaluacionEmprendimientoComponent } from "./componentes/modal-eval
 import { InicioAdministracionComponent } from "./componentes/inicio-administracion/inicio-administracion.component";
 import { EvaluacionResultadosComponent } from "./componentes/evaluacion-resultados/evaluacion-resultados.component";
 import { ListaEmprendimientosPitchComponent } from "./componentes/lista-emprendimientos-pitch/lista-emprendimientos-pitch.component";
+import { EvaluacionEmprendimientoPitchComponent } from "./componentes/evaluacion-emprendimiento-pitch/evaluacion-emprendimiento-pitch.component";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,9 @@ import { ListaEmprendimientosPitchComponent } from "./componentes/lista-emprendi
         EvaluacionEmprendimientoComponent,
         ModalEvaluacionEmprendimientoComponent,
         EvaluacionResultadosComponent,
-        ListaEmprendimientosPitchComponent],
+        ListaEmprendimientosPitchComponent,
+        EvaluacionEmprendimientoPitchComponent
+    ],
     imports: [
         CommonModule,
         SharedModule,
